@@ -43,12 +43,16 @@ const BasicForm = (props) => {
     event.preventDefault();
 
     if (nameIsInvalid || surnameIsInvalid || emailIsInvalid) {
+      // or just if(!formIsValid)
       return;
     }
 
     resetEmailHandler();
     resetNameHandler();
     resetSurnameHandler();
+
+    console.log("Submitted!");
+    console.log(name, surname, email);
   };
 
   const nameInputClasses = nameIsInvalid
