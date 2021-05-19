@@ -13,7 +13,22 @@ const SimpleInput = (props) => {
   }, [enteredNameIsValid]);
 
   const nameInputChangeHandler = (event) => {
+    // because setting up state is scheduled, we can't put the
+    // enteredNameIsValid in the if statement
+    // we would be one step behind
     setEnteredName(event.target.value);
+
+    if (event.target.value.trim() !== "") {
+      setEnteredNameIsValid(true);
+    }
+  };
+
+  const nameInputBlurHandler = (event) => {
+    setEnteredNameTouched(true);
+
+    if (enteredName.trim() === "") {
+      setEnteredNameIsValid(false);
+    }
   };
 
   const formSubmissionHandler = (event) => {
@@ -53,6 +68,7 @@ const SimpleInput = (props) => {
           type="text"
           id="name"
           onChange={nameInputChangeHandler}
+          onBlur={nameInputBlurHandler}
           value={enteredName}
         />
         {nameInputIsInvalid && (
