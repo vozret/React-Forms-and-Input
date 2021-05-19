@@ -3,9 +3,27 @@ import { useState } from "react";
 const SimpleInput = (props) => {
   const [enteredName, setEnteredName] = useState("");
   const [enteredNameTouched, setEnteredNameTouched] = useState(false);
+  // we want to update the formIsValid state whenever the one of the form's input changes
+  // useEffect
+  // const [formIsValid, setFormIsValid] = useState(false);
 
   const enteredNameIsValid = enteredName.trim() !== "";
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
+  let formIsValid = false;
+
+  if (enteredNameIsValid /* && other values */) {
+    formIsValid = true;
+  }
+
+  // example for managing formIsValid when form has
+  // multiple inputs
+  // useEffect(() => {
+  //   if (enteredNameIsValid /* && other values */) {
+  //     setFormIsValid(true);
+  //   } else {
+  //     setFormIsValid(false);
+  //   }
+  // }, [enteredNameIsValid]);
 
   const nameInputChangeHandler = (event) => {
     // because setting up state is scheduled, we can't put the
@@ -49,7 +67,7 @@ const SimpleInput = (props) => {
         )}
       </div>
       <div className="form-actions">
-        <button>Submit</button>
+        <button disabled={!formIsValid}>Submit</button>
       </div>
     </form>
   );
