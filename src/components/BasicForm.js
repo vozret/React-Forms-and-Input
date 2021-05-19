@@ -47,12 +47,12 @@ const BasicForm = (props) => {
       return;
     }
 
+    console.log("Submitted!");
+    console.log(name, surname, email);
+
     resetEmailHandler();
     resetNameHandler();
     resetSurnameHandler();
-
-    console.log("Submitted!");
-    console.log(name, surname, email);
   };
 
   const nameInputClasses = nameIsInvalid
